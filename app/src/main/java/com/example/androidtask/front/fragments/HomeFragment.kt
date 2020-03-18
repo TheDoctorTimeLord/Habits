@@ -13,6 +13,8 @@ import com.example.androidtask.R
 import com.example.androidtask.front.FloatingActionButtonManager
 import com.example.androidtask.front.HabitViewHolderAdapter
 import com.example.androidtask.logic.Habit
+import com.example.androidtask.logic.HabitType
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -43,7 +45,17 @@ class HomeFragment : Fragment() {
             emptyList<Habit>()
         }
 
-        recyclerView.adapter = HabitViewHolderAdapter(habits) { position: Int, habit ->
+        activity?.let { activity ->
+            habitListsViewPager.adapter = HabitListsAdapter(activity, habits)
+            TabLayoutMediator(habitListsTabLayout, habitListsViewPager) { tab, position ->
+                tab.text = when(position) {
+                    0 -> HabitType.GOOD.title
+                    else -> HabitType.BAD.title
+                }
+            }
+        }
+
+        /*recyclerView.adapter = HabitViewHolderAdapter(habits) { position: Int, habit ->
             val bundle = Bundle()
                 .apply {
                     putString(Habit.TITLE, habit.title)
@@ -60,6 +72,6 @@ class HomeFragment : Fragment() {
         recyclerView.setOnScrollListener(FloatingActionButtonManager(floatingActionButton))
 
         val dividerItemDecoration = DividerItemDecoration(context, LinearLayoutManager.VERTICAL)
-        recyclerView.addItemDecoration(dividerItemDecoration)
+        recyclerView.addItemDecoration(dividerItemDecoration)*/
     }
 }
