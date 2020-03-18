@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    tools:context=".front.CreateNewHabitActivity">
+
+    <EditText
+        android:id="@+id/titleHabit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:hint="@string/title_habit"
+        android:autofillHints="@string/title_habit"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/habitDescription"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/long_edit_height"
+        android:inputType="text"
+        android:hint="@string/description_habit"
+        android:autofillHints="@string/description_habit"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        app:layout_constraintTop_toBottomOf="@id/titleHabit"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/centerGuideline"
+        app:layout_constraintGuide_percent="0.5"
+        android:orientation="vertical"
+        android:layout_height="0dp"
+        android:layout_width="0dp" />
+
+    <TextView
+        android:id="@+id/tPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/priority_habit"
+        android:textSize="18sp"
+        android:textColor="@color/fontColorHabitTitle"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/habitDescription"
+        app:layout_constraintEnd_toEndOf="@id/centerGuideline"/>
+
+    <Spinner
+        android:id="@+id/spinnerPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/centerGuideline"
+        app:layout_constraintTop_toBottomOf="@id/tPriority"/>
+
+    <TextView
+        android:id="@+id/tType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:text="@string/type_habit"
+        android:textSize="18sp"
+        android:textColor="@color/fontColorHabitTitle"
+        app:layout_constraintStart_toStartOf="@id/centerGuideline"
+        app:layout_constraintTop_toBottomOf="@id/habitDescription"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@id/tType"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/habitDescription">
+
+        <RadioButton
+            android:id="@+id/goodType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/type_habit_good" />
+
+        <RadioButton
+            android:id="@+id/badType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/type_habit_bad" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:textSize="15sp"
+        android:textColor="@color/fontColorHabitTitle"
+        android:text="@string/count_progress_habit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/centerGuideline"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
+
+    <EditText
+        android:id="@+id/countProgress"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tProgress"
+        app:layout_constraintEnd_toStartOf="@id/ePeriodicity"/>
+
+    <TextView
+        android:id="@+id/tPeriodicity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:textSize="15sp"
+        android:textColor="@color/fontColorHabitTitle"
+        android:text="@string/periodicity_habit"
+        app:layout_constraintStart_toStartOf="@id/centerGuideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup"/>
+
+    <EditText
+        android:id="@+id/ePeriodicity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tPeriodicity"
+        app:layout_constraintStart_toEndOf="@id/countProgress"/>
+
+    <Button
+        android:id="@+id/addNewHabbit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_habit_button"
+        android:layout_marginTop="@dimen/layout_padding"
+        android:layout_marginBottom="@dimen/edit_text_margin"
+        android:layout_marginStart="@dimen/layout_padding"
+        android:layout_marginEnd="@dimen/layout_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ePeriodicity"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

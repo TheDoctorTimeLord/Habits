@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#237CAC</color>
+    <color name="colorPrimaryDark">#185778</color>
+    <color name="backgroundColor">#FFFFFF</color>
+    <color name="backgroundHabit">#DFEAF1</color>
+
+    <color name="fontColorHabitAdditionParameters">#35447A</color>
+    <color name="fontColorHabitTitle">#000000</color>
+    <color name="white">#FFFFFF</color>
+</resources>

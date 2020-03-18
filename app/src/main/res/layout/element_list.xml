@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@color/backgroundHabit">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/button_layout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/habit_element_height" />
+
+    <TextView
+        android:id="@+id/habitTitleW"
+        android:textColor="@color/fontColorHabitTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:maxLines="@integer/max_lines_habit_description"
+        android:layout_marginTop="@dimen/layout_habit_margin"
+        android:layout_marginStart="@dimen/layout_habit_margin"
+        android:layout_marginEnd="@dimen/layout_padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/button_layout"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/habitDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/layout_padding"
+        android:layout_marginStart="@dimen/layout_habit_margin"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:maxLines="@integer/max_lines_habit_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/habitTitleW"
+        app:layout_constraintEnd_toEndOf="@id/button_layout"/>
+
+    <TextView
+        android:id="@+id/habitType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_habit_margin"
+        android:layout_marginBottom="@dimen/layout_habit_margin"
+        android:layout_marginEnd="@dimen/layout_padding"
+        android:textColor="@color/fontColorHabitAdditionParameters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/habitDescription" />
+
+    <TextView
+        android:id="@+id/habitPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_text_padding"
+        android:layout_marginEnd="@dimen/layout_text_padding"
+        android:textColor="@color/fontColorHabitAdditionParameters"
+        app:layout_constraintStart_toEndOf="@id/habitType"
+        app:layout_constraintTop_toBottomOf="@id/habitDescription"/>
+
+    <TextView
+        android:id="@+id/habitPeriodicity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_text_padding"
+        android:layout_marginEnd="@dimen/layout_text_padding"
+        android:textColor="@color/fontColorHabitAdditionParameters"
+        app:layout_constraintStart_toEndOf="@id/habitPriority"
+        app:layout_constraintTop_toBottomOf="@id/habitDescription"/>
+
+    <ImageButton
+        android:id="@+id/editButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        android:background="@color/backgroundHabit"
+        app:layout_constraintStart_toEndOf="@id/button_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

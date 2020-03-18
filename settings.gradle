@@ -1,0 +1,2 @@
+rootProject.name='TaskAndroid1'
+include ':app'

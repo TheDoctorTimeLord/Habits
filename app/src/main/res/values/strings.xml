@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">AndroidTask</string>
+    <string name="default_string" />
+    <string name="button_text">Second activity</string>
+    <string name="created">Created</string>
+    <string name="started">Started</string>
+    <string name="resumed">Resumed</string>
+    <string name="paused">Paused</string>
+    <string name="stopped">Stopped</string>
+    <string name="destroyed">Destroyed</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <string name="title_habit">Название привычки</string>
+    <string name="description_habit">Описание</string>
+    <string name="count_progress_habit">Количество выполнения</string>
+    <string name="periodicity_habit">Периодичность в днях</string>
+    <string name="priority_habit">Приоритет</string>
+    <string name="type_habit">Тип</string>
+    <string name="type_habit_good">Хорошая</string>
+    <string name="type_habit_bad">Плохая</string>
+    <string name="add_habit_button">Сохранить привычку</string>
+    <string name="home_page">Домашний экран</string>
+    <string name="about_app">О приложении</string>
+
+    <string name="open_driver">open_driver</string>
+    <string name="close_driver">close_driver</string>
+
+    <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
