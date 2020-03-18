@@ -17,8 +17,17 @@ import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class MainActivity : AppCompatActivity() {
-    private val habits = mutableListOf<Habit>()
+
     private lateinit var appBarConfiguration: AppBarConfiguration
+    val habits = mutableListOf<Habit>()
+
+    fun addNewHabit(habit: Habit) {
+        habits.add(habit)
+    }
+
+    fun editHabit(newHabit: Habit, position: Int) {
+        habits[position] = newHabit
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
