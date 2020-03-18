@@ -5,3 +5,5 @@
 *.iml
 /app/build/
 /app/libs/
+/local.properties
+/gradlew.bat
