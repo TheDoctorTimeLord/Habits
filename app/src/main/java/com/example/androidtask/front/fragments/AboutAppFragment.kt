@@ -24,7 +24,7 @@ class AboutAppFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance() =
             AboutAppFragment().apply {
                 arguments = Bundle().apply {
 

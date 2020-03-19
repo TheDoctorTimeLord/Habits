@@ -27,7 +27,8 @@
 
     <string name="appbar_scrolling_view_behavior" translatable="false">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="version">Habits v0.1</string>
+    <string name="description_about">Проект для Android Development Course</string>
     <string name="edit_page">Изменить привычку</string>
+    <string name="feodor_zamotaev_prod">prod by Замотаев Фёдор</string>
 </resources>

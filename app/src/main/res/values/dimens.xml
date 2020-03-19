@@ -4,8 +4,10 @@
     <dimen name="layout_padding">10dp</dimen>
     <dimen name="layout_text_padding">10dp</dimen>
     <dimen name="layout_habit_margin">15dp</dimen>
+    <dimen name="image_on_menu_margin">30dp</dimen>
     <dimen name="habit_element_height">75dp</dimen>
     <dimen name="addition_parameters_text_padding">10dp</dimen>
     <dimen name="between_layout_padding">15dp</dimen>
     <dimen name="long_edit_height">70dp</dimen>
+    <dimen name="header_text">25sp</dimen>
 </resources>

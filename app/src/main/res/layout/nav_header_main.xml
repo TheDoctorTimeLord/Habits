@@ -5,11 +5,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary">
 
+    <ImageView
+        android:id="@+id/imageHabit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_habit_48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/image_on_menu_margin"
+        android:layout_marginTop="@dimen/image_on_menu_margin"
+        android:layout_marginBottom="@dimen/image_on_menu_margin"
+        />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Я ТУТ ГЛАВНЫЙ"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="@string/feodor_zamotaev_prod"
+        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/layout_habit_margin"
+        android:layout_marginStart="@dimen/layout_habit_margin"
+        app:layout_constraintTop_toBottomOf="@id/imageHabit"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

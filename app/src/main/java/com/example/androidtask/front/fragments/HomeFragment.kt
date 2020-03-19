@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager.widget.ViewPager
 import com.example.androidtask.MainActivity
 import com.example.androidtask.R
 import com.example.androidtask.front.FloatingActionButtonManager
@@ -19,8 +17,6 @@ import com.example.androidtask.front.HabitViewHolderAdapter
 import com.example.androidtask.logic.Habit
 import com.example.androidtask.logic.HabitContainer
 import com.example.androidtask.logic.HabitType
-import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.app_bar_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(){
@@ -58,7 +54,7 @@ class HomeFragment : Fragment(){
                     recyclerView: RecyclerView,
                     habitType: HabitType
                 ) {
-                    val viewHabits = habits.habits.filter { habit -> habit.type == habitType }
+                    val viewHabits = habits.getList(habitType)
 
                     recyclerView.adapter = HabitViewHolderAdapter(viewHabits) { position: Int, habit ->
                         val bundle = Bundle()

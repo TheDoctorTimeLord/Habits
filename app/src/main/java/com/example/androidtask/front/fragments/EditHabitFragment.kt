@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.RadioButton
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.androidtask.MainActivity
@@ -15,7 +14,6 @@ import com.example.androidtask.logic.Habit
 import com.example.androidtask.logic.HabitPriority
 import com.example.androidtask.logic.HabitType
 import kotlinx.android.synthetic.main.fragment_edit_habit.*
-import java.lang.Exception
 import java.lang.IllegalArgumentException
 
 class EditHabitFragment : Fragment() {
@@ -122,7 +120,7 @@ class EditHabitFragment : Fragment() {
             return
         }
 
-        val type = when(radioGroup.checkedRadioButtonId) {
+        val newType = when(radioGroup.checkedRadioButtonId) {
             goodType.id -> HabitType.GOOD
             badType.id -> HabitType.BAD
             else -> {
@@ -148,15 +146,16 @@ class EditHabitFragment : Fragment() {
         when (actionType) {
             ActionTypes.ADD -> {
                 activity.habits.add(
-                    Habit(title, description, priority, type, progress, periodicity, Habit.COLOR)
+                    Habit(title, description, priority, newType, progress, periodicity, Habit.COLOR)
                 )
             }
             ActionTypes.EDIT -> {
                 val position = arguments?.getInt(MainActivity.POSITION, -1)
                 if (position != null && position != -1) {
                     activity.habits.edit(
-                        Habit(title, description, priority, type, progress, periodicity, Habit.COLOR),
-                        position
+                        Habit(title, description, priority, newType, progress, periodicity, Habit.COLOR),
+                        position,
+                        HabitType.extract(type)
                     )
                 }
             }

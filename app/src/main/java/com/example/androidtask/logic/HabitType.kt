@@ -7,13 +7,13 @@ enum class HabitType(val title: String) {
     BAD("Плохая");
 
     companion object {
-        fun extract(title: String?): HabitType {
+        fun extract(title: String?): HabitType? {
             for(element in values()) {
                 if (element.title == title) {
                     return element
                 }
             }
-            throw IllegalArgumentException("Has not type with title $title")
+            return null
         }
     }
 }
