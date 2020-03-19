@@ -1,5 +1,7 @@
 package com.example.androidtask.logic
 
+import java.io.Serializable
+
 class Habit (
     val title: String,
     val description: String,
@@ -8,7 +10,7 @@ class Habit (
     val progress: Int,
     val periodicity: Int,
     val color: String
-) {
+) : Serializable {
 
     companion object {
         const val TITLE = "title"

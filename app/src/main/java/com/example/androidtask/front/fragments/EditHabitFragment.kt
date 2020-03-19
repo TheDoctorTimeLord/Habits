@@ -147,14 +147,14 @@ class EditHabitFragment : Fragment() {
 
         when (actionType) {
             ActionTypes.ADD -> {
-                activity.addNewHabit(
+                activity.habits.add(
                     Habit(title, description, priority, type, progress, periodicity, Habit.COLOR)
                 )
             }
             ActionTypes.EDIT -> {
                 val position = arguments?.getInt(MainActivity.POSITION, -1)
                 if (position != null && position != -1) {
-                    activity.editHabit(
+                    activity.habits.edit(
                         Habit(title, description, priority, type, progress, periodicity, Habit.COLOR),
                         position
                     )
