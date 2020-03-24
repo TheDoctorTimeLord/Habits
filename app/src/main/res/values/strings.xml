@@ -31,4 +31,5 @@
     <string name="description_about">Проект для Android Development Course</string>
     <string name="edit_page">Изменить привычку</string>
     <string name="feodor_zamotaev_prod">prod by Замотаев Фёдор</string>
+    <string name="filtration">Введите текст для фильтрации</string>
 </resources>

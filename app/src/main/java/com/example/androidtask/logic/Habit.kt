@@ -12,13 +12,10 @@ class Habit (
     val color: String
 ) : Serializable {
 
+    var id: Int? = null
+
     companion object {
-        const val TITLE = "title"
-        const val DESCRIPTION = "description"
-        const val PRIORITY = "priority"
-        const val TYPE = "type"
-        const val PROGRESS = "progress"
-        const val PERIODICITY = "periodicity"
         const val COLOR = "color"
+        const val HABIT = "habit"
     }
 }

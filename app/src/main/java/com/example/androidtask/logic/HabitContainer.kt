@@ -1,30 +1,40 @@
 package com.example.androidtask.logic
 
-import java.io.Serializable
+class HabitContainer private constructor() {
+    private object HOLDER {
+        val INSTANCE = HabitContainer()
+    }
 
-class HabitContainer : Serializable {
-    val habitsGood = mutableListOf<Habit>()
-    val habitsBad = mutableListOf<Habit>()
+    companion object {
+        val instance: HabitContainer by lazy { HOLDER.INSTANCE }
+    }
+
+    private var currentId = 0
+    private val listHabits = mutableListOf<Habit>()
 
     fun add(habit: Habit) {
-        val list = getList(habit.type)
-        list.add(habit)
+        habit.id = currentId++
+        listHabits.add(habit)
     }
 
-    fun edit(habit: Habit, position: Int, oldType: HabitType?) {
-        if (habit.type == oldType) {
-            val list = getList(habit.type)
-            list[position] = habit
-        } else if (oldType != null) {
-            val list = getList(oldType)
-            list.removeAt(position)
-            val oList = getList(habit.type)
-            oList.add(habit)
+    fun edit(habit: Habit) {
+        val position = findHabitPosition(habit.id)
+        if (position != -1) {
+            listHabits[position] = habit
         }
     }
 
-    fun getList(type: HabitType): MutableList<Habit>  = when (type) {
-            HabitType.GOOD -> habitsGood
-            HabitType.BAD -> habitsBad
+    fun getList(type: HabitType): List<Habit>
+            = listHabits.filter { habit -> habit.type == type }
+
+    private fun findHabitPosition(id: Int?) : Int {
+        if (id == null) return -1
+
+        for (i in 0..listHabits.size) {
+            if (listHabits[i].id == id) {
+                return i
+            }
         }
+        return -1
+    }
 }

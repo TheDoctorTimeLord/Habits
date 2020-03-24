@@ -10,9 +10,9 @@ class FloatingActionButtonManager(
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
         if (dy < 0 || (dx == 0 && dy == 0)) {
-            fab.show()
+            fab.animate().scaleX(1f).scaleY(1f).setDuration(300).start()
         } else {
-            fab.hide()
+            fab.animate().scaleX(0f).scaleY(0f).setDuration(300).start()
         }
     }
 }

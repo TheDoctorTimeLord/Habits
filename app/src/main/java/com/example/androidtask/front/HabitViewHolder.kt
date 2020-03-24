@@ -18,7 +18,6 @@ class HabitViewHolder(
     private val habitDescription: TextView = containerView.findViewById(R.id.habitDescription)
     private val habitPriority: TextView = containerView.findViewById(R.id.habitPriority)
     private val habitPeriodicity: TextView = containerView.findViewById(R.id.habitPeriodicity)
-    private val habitType: TextView = containerView.findViewById(R.id.habitType)
     private val editButton: ImageButton = containerView.findViewById(R.id.editButton)
 
     fun bind(habit: Habit) {
@@ -33,7 +32,6 @@ class HabitViewHolder(
         habitDescription.text = habit.description
         habitPriority.text = priority
         habitPeriodicity.text = periodicity
-        habitType.text = habit.type.title
 
         editButton.setOnClickListener {
             event(adapterPosition, habit)

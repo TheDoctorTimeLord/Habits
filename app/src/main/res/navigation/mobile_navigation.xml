@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.androidtask.front.fragments.HomeFragment"
+        android:name="com.example.androidtask.front.fragments.home.HomeFragment"
         android:label="@string/home_page"
         tools:layout="@layout/fragment_home" >
         <action
@@ -21,7 +21,7 @@
         tools:layout="@layout/fragment_about_app" />
     <fragment
         android:id="@+id/editHabitFragment"
-        android:name="com.example.androidtask.front.fragments.EditHabitFragment"
+        android:name="com.example.androidtask.front.fragments.editHabit.EditHabitFragment"
         android:label="@string/edit_page"
         tools:layout="@layout/fragment_edit_habit" />
 </navigation>

@@ -7,9 +7,10 @@ import com.example.androidtask.R
 import com.example.androidtask.logic.Habit
 
 class HabitViewHolderAdapter(
-    private val habits: List<Habit>,
     private val event: (position: Int, habit: Habit) -> Unit
 ) : RecyclerView.Adapter<HabitViewHolder>() {
+
+    var habits: List<Habit> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HabitViewHolder {
         val inflater = LayoutInflater.from(parent.context)

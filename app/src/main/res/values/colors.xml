@@ -3,9 +3,10 @@
     <color name="colorPrimary">#237CAC</color>
     <color name="colorPrimaryDark">#185778</color>
     <color name="backgroundColor">#FFFFFF</color>
-    <color name="backgroundHabit">#DFEAF1</color>
+    <color name="backgroundHabit">#EFE8E1</color>
 
     <color name="fontColorHabitAdditionParameters">#35447A</color>
     <color name="fontColorHabitTitle">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="bottom_sheet_background">#1B7AAC</color>
 </resources>

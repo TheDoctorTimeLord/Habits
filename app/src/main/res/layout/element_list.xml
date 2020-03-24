@@ -4,7 +4,10 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
-    android:background="@color/backgroundHabit">
+    android:background="@color/backgroundHabit"
+    android:paddingTop="@dimen/layout_habit_margin"
+    android:paddingStart="@dimen/layout_habit_margin"
+    android:paddingBottom="@dimen/layout_habit_margin">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/button_layout"
@@ -13,16 +16,22 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="@dimen/habit_element_height" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/start_text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="30dp"/>
+
     <TextView
         android:id="@+id/habitTitleW"
         android:textColor="@color/fontColorHabitTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:maxLines="@integer/max_lines_habit_description"
-        android:layout_marginTop="@dimen/layout_habit_margin"
-        android:layout_marginStart="@dimen/layout_habit_margin"
+        android:textSize="@dimen/title_habit_size"
         android:layout_marginEnd="@dimen/layout_padding"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/start_text"
         app:layout_constraintEnd_toEndOf="@id/button_layout"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -31,32 +40,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/layout_padding"
-        android:layout_marginStart="@dimen/layout_habit_margin"
         android:layout_marginEnd="@dimen/layout_padding"
         android:maxLines="@integer/max_lines_habit_description"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/start_text"
         app:layout_constraintTop_toBottomOf="@id/habitTitleW"
         app:layout_constraintEnd_toEndOf="@id/button_layout"/>
-
-    <TextView
-        android:id="@+id/habitType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/layout_habit_margin"
-        android:layout_marginBottom="@dimen/layout_habit_margin"
-        android:layout_marginEnd="@dimen/layout_padding"
-        android:textColor="@color/fontColorHabitAdditionParameters"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/habitDescription" />
 
     <TextView
         android:id="@+id/habitPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/layout_text_padding"
         android:layout_marginEnd="@dimen/layout_text_padding"
         android:textColor="@color/fontColorHabitAdditionParameters"
-        app:layout_constraintStart_toEndOf="@id/habitType"
+        app:layout_constraintStart_toStartOf="@id/start_text"
         app:layout_constraintTop_toBottomOf="@id/habitDescription"/>
 
     <TextView
@@ -73,11 +69,11 @@
         android:id="@+id/editButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_menu_edit"
         android:background="@color/backgroundHabit"
-        app:layout_constraintStart_toEndOf="@id/button_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/button_layout"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:srcCompat="@drawable/ic_edit_35" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
