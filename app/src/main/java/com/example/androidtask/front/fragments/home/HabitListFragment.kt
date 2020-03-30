@@ -1,6 +1,5 @@
 package com.example.androidtask.front.fragments.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,19 +10,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.androidtask.MainActivity
 import com.example.androidtask.R
 import com.example.androidtask.front.FloatingActionButtonManager
 import com.example.androidtask.front.HabitViewHolderAdapter
 import com.example.androidtask.front.fragments.editHabit.EditHabitFragment
-import com.example.androidtask.logic.Habit
 import com.example.androidtask.logic.HabitContainer
+import com.example.androidtask.logic.database.Habit
 import com.example.androidtask.logic.HabitType
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.fragment_habit_list.*
-import kotlinx.android.synthetic.main.fragment_home.*
-import java.io.Serializable
 
 class HabitListFragment : Fragment() {
 
@@ -48,7 +42,7 @@ class HabitListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.adapter =
-            HabitViewHolderAdapter { position: Int, habit ->
+            HabitViewHolderAdapter({ habit ->
                 val bundle = Bundle()
                     .apply {
                         putSerializable(Habit.HABIT, habit)
@@ -61,7 +55,9 @@ class HabitListFragment : Fragment() {
                     R.id.action_nav_home_to_editHabitFragment,
                     bundle
                 )
-            }
+            }, {habit ->
+                HabitContainer.instance.delete(habit)
+            })
         recyclerView.setOnScrollListener(
             FloatingActionButtonManager(
                 activity!!.findViewById(R.id.floatingActionButton)
