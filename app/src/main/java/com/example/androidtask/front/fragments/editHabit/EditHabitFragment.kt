@@ -9,14 +9,11 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.androidtask.MainActivity
 import com.example.androidtask.R
-import com.example.androidtask.logic.Habit
+import com.example.androidtask.logic.database.Habit
 import com.example.androidtask.logic.HabitContainer
 import com.example.androidtask.logic.HabitPriority
 import com.example.androidtask.logic.HabitType
@@ -39,11 +36,20 @@ class EditHabitFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            val habit: Habit = it.getSerializable(Habit.HABIT) as? Habit
-                ?: Habit("", "", "", HabitType.GOOD, Int.MIN_VALUE, Int.MIN_VALUE, Habit.COLOR)
+            val habit: Habit = it.getSerializable(
+                Habit.HABIT) as? Habit
+                ?: Habit(
+                    "",
+                    "",
+                    HabitPriority.Low,
+                    HabitType.GOOD,
+                    Int.MIN_VALUE,
+                    Int.MIN_VALUE,
+                    Habit.COLOR
+                )
             viewModel.title.value = habit.title
             viewModel.description.value = habit.description
-            viewModel.priority.value = habit.priority
+            viewModel.priority.value = habit.priority.title
             viewModel.type.value = habit.type.title
             viewModel.progress.value = habit.progress
             viewModel.periodicity.value = habit.periodicity
@@ -94,7 +100,7 @@ class EditHabitFragment : Fragment() {
         viewModel.title.observe(viewLifecycleOwner, Observer { title -> titleHabit.setText(title) })
         viewModel.description.observe(viewLifecycleOwner, Observer { desc -> habitDescription.setText(desc) })
         viewModel.priority.observe(viewLifecycleOwner, Observer { priority ->
-            val spinnerPosition = if (priority == "") 0 else HabitPriority.valueOf(priority).ordinal
+            val spinnerPosition = HabitPriority.extract(priority)?.ordinal ?: 0
             spinnerPriority.setSelection(spinnerPosition)
         })
         viewModel.type.observe(viewLifecycleOwner, Observer { type -> when (type) {
@@ -125,11 +131,15 @@ class EditHabitFragment : Fragment() {
             return
         }
 
-        val priority = if (spinnerPriority.selectedItem.toString() != "")
-            spinnerPriority.selectedItem.toString()
-        else {
-            Toast.makeText(context, "Не заполнен приоритет", Toast.LENGTH_LONG).show()
-            return
+        val priority = when (spinnerPriority.selectedItem.toString()) {
+            HabitPriority.Low.title -> HabitPriority.Low
+            HabitPriority.Medium.title -> HabitPriority.Medium
+            HabitPriority.High.title -> HabitPriority.High
+            HabitPriority.Maximal.title -> HabitPriority.Maximal
+            else -> {
+                Toast.makeText(context, "Не заполнен приоритет", Toast.LENGTH_LONG).show()
+                return
+            }
         }
 
         val newType = when(radioGroup.checkedRadioButtonId) {
@@ -158,11 +168,27 @@ class EditHabitFragment : Fragment() {
         when (actionType) {
             ActionTypes.ADD -> {
                 HabitContainer.instance.add(
-                    Habit(title, description, priority, newType, progress, periodicity, Habit.COLOR)
+                    Habit(
+                        title,
+                        description,
+                        priority,
+                        newType,
+                        progress,
+                        periodicity,
+                        Habit.COLOR
+                    )
                 )
             }
             ActionTypes.EDIT -> {
-                val habit = Habit(title, description, priority, newType, progress, periodicity, Habit.COLOR)
+                val habit = Habit(
+                    title,
+                    description,
+                    priority,
+                    newType,
+                    progress,
+                    periodicity,
+                    Habit.COLOR
+                )
                 habit.id = viewModel.id.value
                 HabitContainer.instance.edit(habit)
             }

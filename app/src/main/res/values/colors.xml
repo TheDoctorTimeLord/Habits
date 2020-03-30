@@ -9,4 +9,6 @@
     <color name="fontColorHabitTitle">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="bottom_sheet_background">#1B7AAC</color>
+
+    <color name="low_priority">#EFAE08</color>
 </resources>
