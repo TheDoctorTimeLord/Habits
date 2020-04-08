@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.androidtask.R
 import com.example.androidtask.logic.database.Habit
-import com.example.androidtask.logic.HabitContainer
 import com.example.androidtask.logic.HabitPriority
 import com.example.androidtask.logic.HabitType
 import kotlinx.android.synthetic.main.fragment_edit_habit.*
@@ -49,13 +48,20 @@ class EditHabitFragment : Fragment() {
                 )
             viewModel.title.value = habit.title
             viewModel.description.value = habit.description
-            viewModel.priority.value = habit.priority.title
-            viewModel.type.value = habit.type.title
+            viewModel.priority.value = habit.priority
+            viewModel.type.value = habit.type
             viewModel.progress.value = habit.progress
             viewModel.periodicity.value = habit.periodicity
             viewModel.id.value = habit.id
 
-            viewModel.actionType.value = it.getString(ACTION_TYPE, "")
+            viewModel.actionType.value = try {
+                ActionTypes.valueOf(it.getString(ACTION_TYPE, ""))
+            } catch (e: IllegalArgumentException) {
+                Toast.makeText(context, "Неизвестный тип действия ${viewModel.actionType.value}", Toast.LENGTH_LONG)
+                    .show()
+                findNavController().popBackStack()
+                null
+            }
         }
     }
 
@@ -69,15 +75,6 @@ class EditHabitFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val enumActionType = try {
-            ActionTypes.valueOf(viewModel.actionType.value ?: "")
-        } catch (e: IllegalArgumentException) {
-            Toast.makeText(context, "Неизвестный тип действия ${viewModel.actionType.value}", Toast.LENGTH_LONG)
-                .show()
-            findNavController().popBackStack()
-            null
-        }
-
         observeViewModel()
 
         ArrayAdapter.createFromResource(
@@ -90,9 +87,13 @@ class EditHabitFragment : Fragment() {
         }
 
         addNewHabbit.setOnClickListener {
-            if (enumActionType != null) {
-                validateAndChangeHabits(enumActionType)
-            }
+            validateAndFillModel()
+            viewModel.changeHabits()
+
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+
+            findNavController().popBackStack()
         }
     }
 
@@ -100,12 +101,13 @@ class EditHabitFragment : Fragment() {
         viewModel.title.observe(viewLifecycleOwner, Observer { title -> titleHabit.setText(title) })
         viewModel.description.observe(viewLifecycleOwner, Observer { desc -> habitDescription.setText(desc) })
         viewModel.priority.observe(viewLifecycleOwner, Observer { priority ->
-            val spinnerPosition = HabitPriority.extract(priority)?.ordinal ?: 0
+            val spinnerPosition = priority.ordinal
             spinnerPriority.setSelection(spinnerPosition)
         })
         viewModel.type.observe(viewLifecycleOwner, Observer { type -> when (type) {
-            HabitType.GOOD.title -> goodType.isChecked = true
-            HabitType.BAD.title -> badType.isChecked = true
+            HabitType.GOOD -> goodType.isChecked = true
+            HabitType.BAD -> badType.isChecked = true
+            else -> {}
         }
         })
         viewModel.progress.observe(viewLifecycleOwner, Observer {progress ->
@@ -116,7 +118,7 @@ class EditHabitFragment : Fragment() {
         })
     }
 
-    private fun validateAndChangeHabits(actionType: ActionTypes) {
+    private fun validateAndFillModel() {
         val title = if (titleHabit.text.toString() != "")
             titleHabit.text.toString()
         else {
@@ -165,38 +167,11 @@ class EditHabitFragment : Fragment() {
             return
         }
 
-        when (actionType) {
-            ActionTypes.ADD -> {
-                HabitContainer.instance.add(
-                    Habit(
-                        title,
-                        description,
-                        priority,
-                        newType,
-                        progress,
-                        periodicity,
-                        Habit.COLOR
-                    )
-                )
-            }
-            ActionTypes.EDIT -> {
-                val habit = Habit(
-                    title,
-                    description,
-                    priority,
-                    newType,
-                    progress,
-                    periodicity,
-                    Habit.COLOR
-                )
-                habit.id = viewModel.id.value
-                HabitContainer.instance.edit(habit)
-            }
-        }
-
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
-
-        findNavController().popBackStack()
+        viewModel.title.value = title
+        viewModel.description.value = description
+        viewModel.priority.value = priority
+        viewModel.progress.value = progress
+        viewModel.periodicity.value = periodicity
+        viewModel.type.value = newType
     }
 }

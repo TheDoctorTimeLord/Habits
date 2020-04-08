@@ -8,6 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.room.Room
 import com.example.androidtask.logic.database.Habit
 import com.example.androidtask.logic.database.HabitsDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class HabitContainer private constructor() {
     private object HOLDER {
@@ -23,15 +26,21 @@ class HabitContainer private constructor() {
     private lateinit var database: HabitsDatabase
 
     fun add(habit: Habit) {
-        database.habitDao().insert(habit)
+        GlobalScope.launch(Dispatchers.IO) {
+            database.habitDao().insert(habit)
+        }
     }
 
     fun edit(habit: Habit) {
-        database.habitDao().update(habit)
+        GlobalScope.launch(Dispatchers.IO) {
+            database.habitDao().update(habit)
+        }
     }
 
     fun delete(habit: Habit) {
-        database.habitDao().delete(habit)
+        GlobalScope.launch(Dispatchers.IO) {
+            database.habitDao().delete(habit)
+        }
     }
 
     fun getList(type: HabitType): LiveData<List<Habit>> = when (type) {
@@ -44,7 +53,7 @@ class HabitContainer private constructor() {
             applicationContext,
             HabitsDatabase::class.java,
             "Habits"
-        ).allowMainThreadQueries().build()
+        ).build()
         database.habitDao().getGoodHabits().observe(owner, Observer {
             goodHabits.value = it
         })
